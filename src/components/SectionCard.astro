@@ -1,0 +1,18 @@
+---
+import Icon from "./Icon.astro";
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  icon: "food" | "architecture" | "thoughts";
+  count: number;
+}
+const { href, title, description, icon, count } = Astro.props;
+const countLabel = count === 1 ? "1 entry" : `${count} entries`;
+---
+<a class="section-card" href={href}>
+  <span class="section-card__icon"><Icon name={icon} /></span>
+  <h2>{title}</h2>
+  <p>{description}</p>
+  <span class="section-card__count">{count > 0 ? countLabel : "just planted"}</span>
+</a>

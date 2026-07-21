@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GrowthStage from "../../components/GrowthStage.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const notes = (await getCollection("thoughts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<BaseLayout title="Thoughts" description="Shorter notes and half-formed ideas.">
+  <div class="column">
+    <p class="eyebrow">Section</p>
+    <h1>Thoughts</h1>
+    <p style="color:var(--ink-soft)">
+      Shorter, less-polished notes. The 🌱 / 🌿 / 🌳 marker shows how developed
+      each idea is — seedlings are rough, evergreens have settled.
+    </p>
+
+    {notes.length > 0 ? (
+      <ul class="note-list">
+        {notes.map((note) => (
+          <li>
+            <a href={`/thoughts/${note.id}`}>
+              <div class="note-list__row">
+                <span class="note-list__title">{note.data.title}</span>
+                <span class="note-list__date"><FormattedDate date={note.data.date} /></span>
+              </div>
+            </a>
+            <div style="margin-top:0.35rem"><GrowthStage stage={note.data.growth_stage} /></div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">
+        No notes yet. To add your first, copy <code>content-templates/thought.md</code>
+        into <code>src/content/thoughts/</code>, rename it, and set <code>draft: false</code>.
+      </p>
+    )}
+  </div>
+</BaseLayout>

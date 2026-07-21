@@ -1,0 +1,18 @@
+---
+// Renders the digital-garden "growth stage" of a note.
+interface Props {
+  stage: "seedling" | "budding" | "evergreen";
+}
+const { stage } = Astro.props;
+
+const STAGES = {
+  seedling: { glyph: "🌱", label: "Seedling", note: "a new, rough idea" },
+  budding:  { glyph: "🌿", label: "Budding",  note: "growing, still tending it" },
+  evergreen:{ glyph: "🌳", label: "Evergreen", note: "settled, well developed" },
+} as const;
+
+const s = STAGES[stage];
+---
+<span class="growth" title={s.note}>
+  <span class="glyph" aria-hidden="true">{s.glyph}</span>{s.label}
+</span>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Sidenote from "../components/Sidenote.astro";
+import { AUTHOR } from "../consts";
+---
+<BaseLayout title="About">
+  <article class="column has-sidenotes">
+    <h1>About</h1>
+    <div class="prose">
+      <p>
+        Hi — I'm Andrew Yoo.
+        <Sidenote>
+          Andrew is the name I go by; my given name is Hyoungjoon Yoo.
+        </Sidenote>
+        {" "}
+        <!-- TODO: Replace this placeholder paragraph. A few sentences on who you
+             are, what you do, and why this garden exists. We'll workshop it. -->
+        This is a placeholder paragraph so you can see the page working. Say a
+        little about who you are, what you spend your days on, and what pulls
+        your attention when you're not doing that — the sort of curiosity that
+        led to a garden full of food, buildings, and loose ideas.
+      </p>
+
+      <p>
+        <!-- TODO: optional second paragraph — background, interests, what a
+             visitor can expect to find here. -->
+        A second placeholder paragraph, for when the first isn't enough. This is
+        also a good spot to tell people what they'll find in each section, or how
+        often things change around here (a garden grows on its own schedule).
+      </p>
+
+      <h2>Elsewhere</h2>
+      <p>
+        The best way to reach me is email:
+        <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. I'm also on
+        <a href={AUTHOR.github}>GitHub</a> and
+        <a href={AUTHOR.linkedin}>LinkedIn</a>.
+      </p>
+
+      <h2>Documents</h2>
+      <p>
+        {/* These link to PDFs in the public/ folder. Add the files there and
+            the links go live; until then they'll 404. */}
+        You can view my <a href={AUTHOR.cv}>CV</a> and my
+        <a href={AUTHOR.transcript}> academic transcripts</a> (PDF).
+      </p>
+    </div>
+  </article>
+</BaseLayout>

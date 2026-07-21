@@ -1,0 +1,12 @@
+---
+// A margin note. On wide screens it floats into the right gutter; on narrow
+// screens it becomes an indented, set-off block.
+//
+// Use in .astro files:   <Sidenote>Your aside here.</Sidenote>
+// In markdown posts, use the equivalent raw HTML instead:
+//   <aside class="sidenote">Your aside here.</aside>
+//
+// Either way, the *parent article* must carry the class "has-sidenotes"
+// (PostLayout and NoteLayout already do) for the margin behaviour to kick in.
+---
+<aside class="sidenote"><slot /></aside>

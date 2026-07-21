@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+const posts = (await getCollection("sports", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<BaseLayout title="Sports" description="Matches, teams, and moments worth keeping.">
+  <div class="shell">
+    <p class="eyebrow">Section</p>
+    <h1>Sports</h1>
+    <p style="max-width:52ch;color:var(--ink-soft)">
+      Matches I've watched, teams I follow, and moments worth keeping.
+    </p>
+
+    {posts.length > 0 ? (
+      <div class="card-grid">
+        {posts.map((post) => <PostCard post={post} base="/sports" />)}
+      </div>
+    ) : (
+      <p class="empty-state">
+        Nothing planted here yet. To add your first post, copy
+        <code>content-templates/sports-post/</code> into <code>src/content/sports/</code>,
+        rename it, and set <code>draft: false</code>.
+      </p>
+    )}
+  </div>
+</BaseLayout>

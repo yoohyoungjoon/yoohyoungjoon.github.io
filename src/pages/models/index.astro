@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ModelCard from "../../components/ModelCard.astro";
+
+// Sort live → building → planned, then newest first within each group.
+const order = { live: 0, building: 1, planned: 2 } as const;
+const posts = (await getCollection("models", ({ data }) => !data.draft)).sort(
+  (a, b) =>
+    order[a.data.status] - order[b.data.status] ||
+    b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<BaseLayout title="Models" description="Data and machine-learning projects.">
+  <div class="shell">
+    <p class="eyebrow">Section</p>
+    <h1>Models</h1>
+    <p style="max-width:52ch;color:var(--ink-soft)">
+      Data and machine-learning projects I'm building — from a Premier League
+      model to player clustering, and whatever comes next.
+    </p>
+
+    {posts.length > 0 ? (
+      <div class="card-grid">
+        {posts.map((post) => <ModelCard post={post} />)}
+      </div>
+    ) : (
+      <p class="empty-state">
+        Nothing here yet. To add a project, copy
+        <code>content-templates/model/</code> into <code>src/content/models/</code>,
+        rename it, and set <code>draft: false</code>.
+      </p>
+    )}
+  </div>
+</BaseLayout>

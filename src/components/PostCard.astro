@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import FormattedDate from "./FormattedDate.astro";
+
+// `post` is a collection entry from getCollection(). `base` is the section's
+// URL prefix, e.g. "/food" or "/architecture".
+interface Props {
+  post: {
+    id: string;
+    data: {
+      title: string;
+      date: Date;
+      location?: string;
+      cover_image?: import("astro").ImageMetadata;
+      cover_alt?: string;
+    };
+  };
+  base: string;
+}
+const { post, base } = Astro.props;
+const { title, date, location, cover_image, cover_alt } = post.data;
+const href = `${base}/${post.id}`;
+---
+<a class="post-card" href={href}>
+  {cover_image ? (
+    <div class="post-card__thumb">
+      <Image
+        src={cover_image}
+        alt={cover_alt || title}
+        width={640}
+        height={480}
+        widths={[320, 640, 960]}
+        sizes="(max-width: 640px) 90vw, 320px"
+      />
+    </div>
+  ) : (
+    <div class="post-card__thumb post-card__thumb--empty" aria-hidden="true">✎</div>
+  )}
+  <h3 class="post-card__title">{title}</h3>
+  <div class="post-card__meta">
+    <FormattedDate date={date} />
+    {location && <span>· {location}</span>}
+  </div>
+</a>

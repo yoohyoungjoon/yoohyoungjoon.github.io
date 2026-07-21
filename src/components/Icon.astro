@@ -1,0 +1,90 @@
+---
+// Small hand-drawn-style line illustrations. One <svg> per section.
+// They use currentColor, so their color comes from CSS (.section-card__icon).
+interface Props {
+  name: "food" | "architecture" | "sports" | "thoughts" | "models";
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+
+const common = {
+  viewBox: "0 0 64 64",
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-width": "2",
+  "stroke-linecap": "round" as const,
+  "stroke-linejoin": "round" as const,
+  "aria-hidden": "true" as const,
+};
+---
+
+{
+  name === "food" && (
+    <svg {...common} class={className}>
+      {/* rising steam */}
+      <path d="M25 19c3-3 0-6 0-9s3-6 0-9" opacity="0.8" />
+      <path d="M33 18c3-3 0-6 0-9s3-6 0-9" opacity="0.8" />
+      {/* chopsticks */}
+      <path d="M44 11 32 33M50 15 37 35" />
+      {/* bowl */}
+      <path d="M11 33h42a21 21 0 0 1-42 0Z" />
+      <path d="M9 33c4 2.6 13.5 4.5 23 4.5S51 35.6 55 33" />
+    </svg>
+  )
+}
+{
+  name === "architecture" && (
+    <svg {...common} class={className}>
+      {/* pediment */}
+      <path d="M11 27 32 12l21 15" />
+      {/* entablature */}
+      <path d="M13 27h38" />
+      {/* columns */}
+      <path d="M19 30v20M28 30v20M36 30v20M45 30v20" />
+      {/* steps */}
+      <path d="M10 50h44M13 54h38" />
+    </svg>
+  )
+}
+{
+  name === "thoughts" && (
+    <svg {...common} class={className}>
+      {/* stem */}
+      <path d="M32 52V28" />
+      {/* left leaf */}
+      <path d="M32 33c-8 0-14-5-15-12 8-1 15 4 15 12Z" />
+      {/* right leaf */}
+      <path d="M32 28c8-1 14-6 15-13-8-1-15 5-15 13Z" />
+      {/* soil */}
+      <path d="M19 52h26" />
+    </svg>
+  )
+}
+{
+  name === "sports" && (
+    <svg {...common} class={className}>
+      {/* ball */}
+      <circle cx="32" cy="32" r="20" />
+      {/* centre pentagon */}
+      <path d="M32 22 41 29 38 40 26 40 23 29Z" />
+      {/* spokes out to the rim */}
+      <path d="M32 22V14M41 29l7-4M38 40l5 8M26 40l-5 8M23 29l-7-4" />
+    </svg>
+  )
+}
+{
+  name === "models" && (
+    <svg {...common} class={className}>
+      {/* axes */}
+      <path d="M15 12v37h37" />
+      {/* cluster one (lower left) */}
+      <circle cx="24" cy="40" r="2.4" fill="currentColor" stroke="none" />
+      <circle cx="29" cy="36" r="2.4" fill="currentColor" stroke="none" />
+      <circle cx="22" cy="33" r="2.4" fill="currentColor" stroke="none" />
+      {/* cluster two (upper right) */}
+      <circle cx="43" cy="23" r="2.4" fill="currentColor" stroke="none" />
+      <circle cx="48" cy="27" r="2.4" fill="currentColor" stroke="none" />
+      <circle cx="41" cy="19" r="2.4" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}

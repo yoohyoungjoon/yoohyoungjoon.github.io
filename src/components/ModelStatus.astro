@@ -1,0 +1,16 @@
+---
+// Project status for a Model entry: planned → building → live.
+interface Props {
+  status: "planned" | "building" | "live";
+}
+const { status } = Astro.props;
+const STATUS = {
+  planned:  { label: "Planned",  note: "not started yet" },
+  building: { label: "Building", note: "work in progress" },
+  live:     { label: "Live",     note: "shipped / usable" },
+} as const;
+const s = STATUS[status];
+---
+<span class={`status status--${status}`} title={s.note}>
+  <span class="status__dot" aria-hidden="true"></span>{s.label}
+</span>

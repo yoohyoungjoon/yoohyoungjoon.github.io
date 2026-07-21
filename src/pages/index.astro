@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionCard from "../components/SectionCard.astro";
+
+const notDraft = ({ data }: { data: { draft?: boolean } }) => !data.draft;
+const [food, architecture, sports, thoughts, models] = await Promise.all([
+  getCollection("food", notDraft),
+  getCollection("architecture", notDraft),
+  getCollection("sports", notDraft),
+  getCollection("thoughts", notDraft),
+  getCollection("models", notDraft),
+]);
+
+const sections = [
+  {
+    href: "/food",
+    title: "Food",
+    icon: "food" as const,
+    description: "Meals I've cooked, places I've eaten, recipes worth keeping.",
+    count: food.length,
+  },
+  {
+    href: "/architecture",
+    title: "Architecture",
+    icon: "architecture" as const,
+    description: "Buildings and spaces that made me stop and look.",
+    count: architecture.length,
+  },
+  {
+    href: "/sports",
+    title: "Sports",
+    icon: "sports" as const,
+    description: "Matches, teams, and moments worth keeping.",
+    count: sports.length,
+  },
+  {
+    href: "/thoughts",
+    title: "Thoughts",
+    icon: "thoughts" as const,
+    description: "Notes and half-formed ideas, at various stages of growth.",
+    count: thoughts.length,
+  },
+  {
+    href: "/models",
+    title: "Models",
+    icon: "models" as const,
+    description: "Data and machine-learning projects, building in the open.",
+    count: models.length,
+  },
+];
+---
+<BaseLayout>
+  <div class="shell">
+    <section class="intro">
+      <p class="eyebrow">Welcome to the garden</p>
+      <h1>Andrew Yoo</h1>
+      <p>
+        A small, tended corner of the web where I keep what I'm noticing —
+        food I've cooked, buildings I've stood in front of, and ideas I'm still
+        turning over. Wander in.
+        <!-- TODO: workshop this intro line into your real voice. -->
+      </p>
+    </section>
+
+    <nav class="section-index" aria-label="Sections">
+      {sections.map((s) => <SectionCard {...s} />)}
+    </nav>
+  </div>
+</BaseLayout>

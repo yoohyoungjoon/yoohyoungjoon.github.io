@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+const posts = (await getCollection("food", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<BaseLayout title="Food" description="Meals cooked, restaurants, and recipes.">
+  <div class="shell">
+    <p class="eyebrow">Section</p>
+    <h1>Food</h1>
+    <p style="max-width:52ch;color:var(--ink-soft)">
+      Meals I've cooked, places I've eaten, and recipes I want to remember.
+    </p>
+
+    {posts.length > 0 ? (
+      <div class="card-grid">
+        {posts.map((post) => <PostCard post={post} base="/food" />)}
+      </div>
+    ) : (
+      <p class="empty-state">
+        Nothing planted here yet. To add your first post, copy
+        <code>content-templates/food-post/</code> into <code>src/content/food/</code>,
+        rename it, and set <code>draft: false</code>.
+      </p>
+    )}
+  </div>
+</BaseLayout>

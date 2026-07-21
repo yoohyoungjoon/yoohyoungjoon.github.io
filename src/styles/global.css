@@ -1,0 +1,476 @@
+/* Self-hosted variable serif — warm, editorial, no external requests.
+   opsz = the optical-size axis (finer detail at display sizes). */
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+
+/* =========================================================================
+   DESIGN TOKENS
+   Change a value here and it updates everywhere. Colors are warm on purpose:
+   a paper-cream ground, warm near-black ink, and a muted garden green accent.
+   ========================================================================= */
+:root {
+  /* palette */
+  --bg: #faf7f0;         /* warm paper */
+  --bg-sunk: #f3efe4;    /* slightly deeper cream for cards / wells */
+  --ink: #2f2d28;        /* warm near-black */
+  --ink-soft: #6d685c;   /* muted brown-grey for meta, captions */
+  --rule: #e5dfd1;       /* warm hairline */
+  --accent: #4c6b57;     /* muted eucalyptus — the garden green */
+  --accent-deep: #3a5544;/* darker green for hovers / emphasis */
+
+  /* type */
+  --serif: "Newsreader Variable", Newsreader, Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* rhythm */
+  --measure: 65ch;       /* comfortable reading width */
+  --shell: 1080px;       /* wide wrapper for indexes / grids */
+  --gutter: 15rem;       /* right margin reserved for sidenotes on wide screens */
+  --space: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --radius: 3px;         /* barely-there rounding; no pill shapes */
+}
+
+/* =========================================================================
+   RESET-ISH BASE
+   ========================================================================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.02rem, 0.98rem + 0.25vw, 1.14rem);
+  line-height: 1.72;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+::selection { background: #dfe6dc; }
+
+/* =========================================================================
+   LAYOUT WRAPPERS
+   ========================================================================= */
+.shell { width: 100%; max-width: var(--shell); margin-inline: auto; padding-inline: var(--space); }
+.column { width: 100%; max-width: var(--measure); margin-inline: auto; padding-inline: var(--space); }
+
+main { flex: 1 0 auto; padding-block: clamp(2rem, 1rem + 4vw, 4.5rem); }
+
+/* =========================================================================
+   TYPOGRAPHY
+   ========================================================================= */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 560;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 2.2em 0 0.55em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 2.9rem); font-weight: 500; margin-top: 0; }
+h2 { font-size: clamp(1.4rem, 1.2rem + 1vw, 1.75rem); }
+h3 { font-size: 1.28rem; }
+p { margin: 0 0 1.15em; }
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+}
+a:hover {
+  color: var(--accent-deep);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+blockquote {
+  margin: 1.6em 0;
+  padding-left: 1.1em;
+  border-left: 2px solid var(--accent);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.6em 0;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.86em;
+  background: var(--bg-sunk);
+  padding: 0.12em 0.38em;
+  border-radius: var(--radius);
+}
+pre {
+  background: var(--bg-sunk);
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; }
+
+/* Small utility label used for eyebrows, dates, meta rows. */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* =========================================================================
+   HEADER / NAV
+   ========================================================================= */
+.site-header {
+  border-bottom: 1px solid var(--rule);
+}
+.site-header .shell {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.4rem;
+  flex-wrap: wrap;
+}
+.site-header a { text-decoration: none; }
+.brand {
+  font-size: 1.3rem;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+.brand .tagline {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-left: 0.6rem;
+}
+.site-nav {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  display: flex;
+  gap: 1.35rem;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  color: var(--ink-soft);
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid transparent;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.site-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.site-nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding-block: 2rem;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+.site-footer .shell {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-footer a { color: var(--ink-soft); text-decoration-color: var(--rule); }
+.site-footer a:hover { color: var(--accent-deep); }
+
+/* =========================================================================
+   POST META ROW  (date · location · rating, etc.)
+   ========================================================================= */
+.post-meta {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  margin-bottom: 1.6rem;
+}
+.post-meta .dot::before { content: "·"; margin-right: 0.9rem; color: var(--rule); }
+.rating { color: var(--accent-deep); letter-spacing: 0.05em; }
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  background: var(--bg-sunk);
+  border: 1px solid var(--rule);
+  padding: 0.1rem 0.55rem;
+  border-radius: 100px;
+  text-decoration: none;
+}
+
+/* =========================================================================
+   PROSE (article body)
+   Reserves a right gutter on wide screens so sidenotes can sit in the margin.
+   ========================================================================= */
+.prose { max-width: var(--measure); }
+.prose img { border-radius: var(--radius); margin: 1.6em 0; }
+.prose figure { margin: 1.8em 0; }
+.prose figcaption {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+/* =========================================================================
+   SIDENOTES  (margin notes on wide screens, inline on narrow)
+   Usable two ways:
+   1. In .astro files:   <Sidenote>…</Sidenote>
+   2. In markdown posts: <aside class="sidenote">…</aside>
+   ========================================================================= */
+.sidenote {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+@media (min-width: 1000px) {
+  /* Give prose a right margin and float the note into it. */
+  .has-sidenotes .prose { margin-right: var(--gutter); }
+  .has-sidenotes .sidenote {
+    float: right;
+    clear: right;
+    width: calc(var(--gutter) - 1.5rem);
+    margin-right: calc(-1 * var(--gutter));
+    margin-top: 0.35rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--rule);
+    position: relative;
+  }
+}
+@media (max-width: 999.98px) {
+  /* Inline, set-off note on narrower screens. */
+  .sidenote {
+    display: block;
+    margin: 1.1rem 0;
+    padding: 0.6rem 0 0.6rem 1rem;
+    border-left: 2px solid var(--accent);
+    background: var(--bg-sunk);
+  }
+}
+
+/* =========================================================================
+   POST CARD  (Food / Architecture index grids)
+   ========================================================================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(1.2rem, 0.8rem + 1.5vw, 2rem);
+  margin-top: 2rem;
+}
+.post-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.post-card__thumb {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  background: var(--bg-sunk);
+}
+.post-card__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.post-card:hover .post-card__thumb img { transform: scale(1.03); }
+.post-card__thumb--empty {
+  display: grid; place-items: center;
+  color: var(--rule);
+  aspect-ratio: 4 / 3;
+}
+.post-card__title {
+  font-size: 1.18rem;
+  font-weight: 560;
+  line-height: 1.25;
+  margin: 0.8rem 0 0.25rem;
+  transition: color 0.18s ease;
+}
+.post-card:hover .post-card__title { color: var(--accent-deep); }
+.post-card__meta {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  display: flex; gap: 0.6rem; flex-wrap: wrap;
+}
+
+/* =========================================================================
+   HOME — visual section index
+   ========================================================================= */
+.intro { max-width: 40ch; }
+.intro h1 { margin-bottom: 0.4rem; }
+.intro p { font-size: 1.16rem; color: var(--ink); }
+
+.section-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(1rem, 0.6rem + 1.5vw, 1.75rem);
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+}
+.section-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.6rem 1.5rem 1.4rem;
+  background: var(--bg-sunk);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.section-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.section-card__icon { width: 56px; height: 56px; color: var(--accent-deep); }
+.section-card__icon svg { width: 100%; height: 100%; }
+.section-card h2 { margin: 0.2rem 0 0; font-size: 1.35rem; }
+.section-card p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; line-height: 1.5; }
+.section-card__count {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: auto;
+  padding-top: 0.6rem;
+}
+
+/* =========================================================================
+   GROWTH STAGE (Thoughts)
+   ========================================================================= */
+.growth {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent-deep);
+}
+.growth .glyph { font-size: 0.95rem; }
+
+/* Model status badge (planned / building / live) */
+.status {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink-soft);
+}
+.status__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  display: inline-block;
+}
+.status--planned .status__dot { background: #b9b2a2; }        /* dormant grey */
+.status--building .status__dot { background: #c8923a; }        /* amber, in progress */
+.status--live { color: var(--accent-deep); }
+.status--live .status__dot { background: var(--accent); }      /* green, shipped */
+
+/* Project (repo / demo) links on a Model page */
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  margin: 0.4rem 0 1.6rem;
+}
+.project-links a { text-decoration-color: var(--accent); }
+
+/* Thoughts list */
+.note-list { list-style: none; padding: 0; margin: 2rem 0 0; }
+.note-list li {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+}
+.note-list li:last-child { border-bottom: 1px solid var(--rule); }
+.note-list a { text-decoration: none; }
+.note-list a:hover .note-list__title { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 0.18em; }
+.note-list__title { font-size: 1.18rem; font-weight: 560; }
+.note-list__row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.note-list__date { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); }
+
+/* Empty-state message for sections with no posts yet. */
+.empty-state {
+  margin-top: 2rem;
+  padding: 1.6rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+
+/* Back link at the top of a post. */
+.back-link {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--ink-soft);
+  display: inline-block;
+  margin-bottom: 1.4rem;
+}
+.back-link:hover { color: var(--accent-deep); }
+
+/* Comments well */
+.comments { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+
+/* =========================================================================
+   ACCESSIBILITY
+   ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+}
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 10; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+  .post-card:hover .post-card__thumb img { transform: none; }
+}

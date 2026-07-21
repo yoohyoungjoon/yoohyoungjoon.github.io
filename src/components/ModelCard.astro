@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import ModelStatus from "./ModelStatus.astro";
+
+interface Props {
+  post: {
+    id: string;
+    data: {
+      title: string;
+      status: "planned" | "building" | "live";
+      tech?: string[];
+      cover_image?: import("astro").ImageMetadata;
+      cover_alt?: string;
+    };
+  };
+}
+const { post } = Astro.props;
+const { title, status, tech = [], cover_image, cover_alt } = post.data;
+---
+<a class="post-card" href={`/models/${post.id}`}>
+  {cover_image ? (
+    <div class="post-card__thumb">
+      <Image
+        src={cover_image}
+        alt={cover_alt || title}
+        width={640}
+        height={480}
+        widths={[320, 640, 960]}
+        sizes="(max-width: 640px) 90vw, 320px"
+      />
+    </div>
+  ) : (
+    <div class="post-card__thumb post-card__thumb--empty" aria-hidden="true">◍</div>
+  )}
+  <h3 class="post-card__title">{title}</h3>
+  <div class="post-card__meta">
+    <ModelStatus status={status} />
+    {tech.length > 0 && <span>· {tech.join(", ")}</span>}
+  </div>
+</a>

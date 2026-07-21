@@ -1,0 +1,15 @@
+---
+import { AUTHOR } from "../consts";
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="shell">
+    <span>© {year} {AUTHOR.name}</span>
+    <span class="footer-links">
+      <a href={`mailto:${AUTHOR.email}`}>Email</a> ·
+      <a href={AUTHOR.github} rel="me">GitHub</a> ·
+      <a href={AUTHOR.linkedin} rel="me">LinkedIn</a> ·
+      <a href={AUTHOR.cv}>CV</a>
+    </span>
+  </div>
+</footer>
