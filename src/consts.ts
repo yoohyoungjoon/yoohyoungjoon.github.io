@@ -44,9 +44,9 @@ export const NAV = [
 // Until then, ENABLED stays false and no comment box renders.
 // ---------------------------------------------------------------------------
 export const COMMENTS = {
-  ENABLED: false,
+  ENABLED: true,
   repo: "yoohyoungjoon/yoohyoungjoon.github.io", // "owner/repo"
-  repoId: "PASTE_REPO_ID_FROM_GISCUS", // e.g. "R_kgD..."
-  category: "Comments",
-  categoryId: "PASTE_CATEGORY_ID_FROM_GISCUS", // e.g. "DIC_kwD..."
+  repoId: "R_kgDOTem4ww", // e.g. "R_kgD..."
+  category: "General",
+  categoryId: "DIC_kwDOTem4w84DBohq", // e.g. "DIC_kwD..."
 } as const;
