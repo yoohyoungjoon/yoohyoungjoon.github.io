@@ -1,8 +1,3 @@
-// ---------------------------------------------------------------------------
-// Edit this file to change site-wide text and links. Nothing here is "magic":
-// it's just the values the templates read from.
-// ---------------------------------------------------------------------------
-
 export const SITE_TITLE = "Andrew Yoo";
 export const SITE_TAGLINE = "Personal Notebook";
 export const SITE_DESCRIPTION =
@@ -32,17 +27,6 @@ export const NAV = [
   { label: "About", href: "/about" },
 ] as const;
 
-// ---------------------------------------------------------------------------
-// Comments (Giscus, backed by your repo's GitHub Discussions).
-// To turn these on:
-//   1. Make the repo public and enable Discussions (Settings ▸ General ▸ Features).
-//   2. Install the giscus app: https://github.com/apps/giscus
-//   3. Go to https://giscus.app, enter yoohyoungjoon/yoohyoungjoon.github.io,
-//      pick a Discussion category (e.g. "Announcements" or a new "Comments"),
-//      and copy the four values it generates into the fields below.
-//   4. Set ENABLED to true.
-// Until then, ENABLED stays false and no comment box renders.
-// ---------------------------------------------------------------------------
 export const COMMENTS = {
   ENABLED: true,
   repo: "yoohyoungjoon/yoohyoungjoon.github.io", // "owner/repo"
