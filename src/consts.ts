@@ -4,7 +4,7 @@
 // ---------------------------------------------------------------------------
 
 export const SITE_TITLE = "Andrew Yoo";
-export const SITE_TAGLINE = "A digital garden";
+export const SITE_TAGLINE = "Personal Notebook";
 export const SITE_DESCRIPTION =
   "A personal garden of notes on food, architecture, and half-formed ideas — by Andrew Yoo.";
 
@@ -16,8 +16,8 @@ export const AUTHOR = {
   linkedin: "https://www.linkedin.com/in/hyoungjoon-yoo-61a751203/",
   // These point to PDFs you drop into the public/ folder. The links will 404
   // until those files exist. Rename here if you name the files differently.
-  cv: "/andrew-yoo-cv.pdf", // shown in the footer
-  transcript: "/andrew-yoo-transcript.pdf", // linked from the About page
+  cv: "/Resume260604.pdf", // shown in the footer
+  transcript: "/ColumbiaTranscriptFinal.pdf", // linked from the About page
 };
 
 // Top-nav sections, in order. Each maps to a folder in src/content/ and a
